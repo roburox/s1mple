@@ -1,0 +1,81 @@
+-- Predefined functions
+local function WaitForChildOfClass(Object, Class)
+local Found = Object:FindFirstChildOfClass(Class)
+if not Found then
+repeat
+task.wait()
+Found = Object:FindFirstChildOfClass(Class)
+until Found
+end
+
+return Found
+end
+
+
+-- Defining globals
+local VRService = game:GetService('VRService')
+local Players = game:GetService('Players')
+local LocalPlayer = Players.LocalPlayer or (function()
+Players:GetPropertyChangedSignal('LocalPlayer'):Wait()
+return Players.LocalPlayer
+end)()
+local PlayerScripts = WaitForChildOfClass(LocalPlayer, 'PlayerScripts')
+
+-- Getting required modules
+local PlayerModule = PlayerScripts:WaitForChild('PlayerModule')
+local CameraModule = PlayerModule:WaitForChild('CameraModule')
+local ClassicCameraObject = CameraModule:WaitForChild('ClassicCamera')
+local PoppercamObject = CameraModule:WaitForChild('Poppercam')
+
+-- Loading modules
+local ClassicCamera = require(ClassicCameraObject)
+local Poppercam = require(PoppercamObject)
+
+
+
+-- Hooks the ClassicCamera "Update" function in order to unlock the Min/Max Y value
+do
+local Update = ClassicCamera.Update
+local CameraInput = debug.getupvalue(Update, 3)
+
+local UpdateVector = Vector2.new()
+local OldUpdate
+OldUpdate = hookfunction(Update, function(self)
+local TimeDelta = tick() - self.lastUpdate
+
+local ReturnValue = { OldUpdate(self) }
+if self:GetSubjectPosition() and LocalPlayer and workspace.CurrentCamera and not self.isFollowCamera and not (VRService.VREnabled and not self:IsInFirstPerson()) then
+local SubjectPosition = self:GetSubjectPosition()
+local NewCameraFocus = CFrame.new(SubjectPosition)
+
+UpdateVector -= CameraInput.getRotation()
+
+ReturnValue[1] = ((NewCameraFocus * CFrame.Angles(0, UpdateVector.X, 0)) * CFrame.Angles(UpdateVector.Y, 0, 0)) + self:GetCameraToggleOffset(TimeDelta)
+self.lastCameraTransform = ReturnValue[1]
+end
+
+return unpack(ReturnValue)
+end)
+end
+
+
+
+-- Hooks the Poppercam "Update" function to patch a bug that occurs in the ZoomCamera via the Poppercam
+do
+local Update = Poppercam.Update
+local ZoomController = debug.getupvalue(Update, 1)
+
+hookfunction(Update, function(self, RenderDistance, DesiredCameraCFrame, DesiredCameraFocus)
+local RotatedFocus = CFrame.new(DesiredCameraFocus.p, DesiredCameraCFrame.p - DesiredCameraCFrame.LookVector) * CFrame.new(
+0, 0, 0,
+-1, 0, 0,
+0, 1, 0,
+0, 0, -1
+)
+
+local Extrapolation = self.focusExtrapolator:Step(RenderDistance, RotatedFocus)
+local Zoom = ZoomController.Update(RenderDistance, RotatedFocus, Extrapolation)
+
+return DesiredCameraCFrame * CFrame.new(0, 0, Zoom), DesiredCameraFocus
+end)
+end
