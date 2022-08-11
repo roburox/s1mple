@@ -1,0 +1,9 @@
+local hrp  = game.Players.LocalPlayer.Character:FindFirstChild("Humanoid")
+hrp.Parent = nil;
+hrp:Clone()
+hrp.Parent =  game.Players.LocalPlayer.Character
+hrp.Name   = "Humanoid"
+
+local player = game.Players.LocalPlayer
+local safe = player.Character.scripts.safe
+safe.Parent = nil;
