@@ -1,0 +1,9 @@
+local lp = game.Players.LocalPlayer
+local char = lp.Character
+
+for _, v in pairs(char:GetChildren()) do
+    if v:IsA("Accessory") then
+        v.Handle:Remove()
+        v.Parent = nil
+    end
+end

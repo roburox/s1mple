@@ -1,0 +1,10 @@
+local pchar = game:GetService("Players").LocalPlayer.Character -- This bypasses all Anti exploits so do not worry .
+if pchar:FindFirstChild("Shirt") then
+   pchar.Shirt:Remove()
+end
+if pchar:FindFirstChild("Pants") then
+   pchar.Pants:Remove()
+end
+if pchar:FindFirstChild("Shirt Graphic") then
+   pchar["Shirt Graphic"].Graphic = ""
+end
