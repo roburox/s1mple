@@ -1,0 +1,172 @@
+local DXplorer = Instance.new("ScreenGui")
+local DXplorerTitle = Instance.new("Frame")
+local DXplorerBody = Instance.new("Frame")
+local TextLabel = Instance.new("TextLabel")
+local TextLabel_2 = Instance.new("TextLabel")
+local PathFrm = Instance.new("Frame")
+local Pathlbl = Instance.new("Frame")
+local TextL = Instance.new("TextLabel")
+local CopyPathBtn = Instance.new("TextButton")
+local CloseBtn = Instance.new("TextButton")
+local PathTxt = Instance.new("TextLabel")
+--Properties:
+DXplorer.Name = "DXplorer"
+DXplorer.Parent = game.CoreGui
+
+DXplorerTitle.Name = "DXplorerTitle"
+DXplorerTitle.Parent = DXplorer
+DXplorerTitle.BackgroundColor3 = Color3.new(0.101961, 0.101961, 0.101961)
+DXplorerTitle.BackgroundTransparency = 0
+DXplorerTitle.BorderSizePixel = 0
+DXplorerTitle.Position = UDim2.new(0.736306501, 0, 0.687722888, 136)
+DXplorerTitle.Size = UDim2.new(0, 361, 0, 33)
+DXplorerTitle.ZIndex = 1
+
+DXplorerBody.Name = "DXplorerBody"
+DXplorerBody.Parent = DXplorerTitle
+DXplorerBody.BackgroundColor3 = Color3.new(0.133333, 0.133333, 0.133333)
+DXplorerBody.BackgroundTransparency = 0.050000000745058
+DXplorerBody.BorderSizePixel = 0
+DXplorerBody.Position = UDim2.new(0, 0, 1.00000095, 0)
+DXplorerBody.Size = UDim2.new(0, 361, 0, 40)
+
+TextLabel.Parent = DXplorerTitle
+TextLabel.BackgroundColor3 = Color3.new(0.101961, 0.101961, 0.101961)
+TextLabel.BackgroundTransparency = 1
+TextLabel.BorderSizePixel = 0
+TextLabel.Size = UDim2.new(0, 333, 0, 33)
+TextLabel.Font = Enum.Font.Code
+TextLabel.Text = " DXplorer"
+TextLabel.TextColor3 = Color3.new(1, 1, 1)
+TextLabel.TextSize = 17
+TextLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+TextLabel_2.Parent = PropTitle
+TextLabel_2.BackgroundColor3 = Color3.new(0.101961, 0.101961, 0.101961)
+TextLabel_2.BackgroundTransparency = 1
+TextLabel_2.BorderSizePixel = 0
+TextLabel_2.Size = UDim2.new(0, 297, 0, 33)
+TextLabel_2.Font = Enum.Font.SciFi
+TextLabel_2.Text = "  Properties"
+TextLabel_2.TextColor3 = Color3.new(1, 1, 1)
+TextLabel_2.TextSize = 17
+TextLabel_2.TextXAlignment = Enum.TextXAlignment.Left
+
+PathFrm.Name = "PathFrm"
+PathFrm.Parent = DXplorerBody
+PathFrm.BackgroundColor3 = Color3.new(0.164706, 0.164706, 0.164706)
+PathFrm.BackgroundTransparency = 0.050000000745058
+PathFrm.BorderColor3 = Color3.new(0.101961, 0.101961, 0.101961)
+PathFrm.BorderSizePixel = 2
+PathFrm.Position = UDim2.new(0.160664827, 0, 0.0335195549, 5)
+PathFrm.Size = UDim2.new(0, 268, 0, 27)
+
+Pathlbl.Name = "Pathlbl"
+Pathlbl.Parent = DXplorerBody
+Pathlbl.BackgroundColor3 = Color3.new(0.133333, 0.133333, 0.133333)
+Pathlbl.BackgroundTransparency = 0.050000000745058
+Pathlbl.BorderColor3 = Color3.new(0.101961, 0.101961, 0.101961)
+Pathlbl.BorderSizePixel = 2
+Pathlbl.Position = UDim2.new(0.0193905812, 0, 0.0335195549, 5)
+Pathlbl.Size = UDim2.new(0, 51, 0, 27)
+
+TextL.Parent = Pathlbl
+TextL.BackgroundColor3 = Color3.new(1, 1, 1)
+TextL.BackgroundTransparency = 1
+TextL.BorderSizePixel = 0
+TextL.Position = UDim2.new(0, 0, 0, 1)
+TextL.Size = UDim2.new(0, 51, 0, 27)
+TextL.Font = Enum.Font.SciFi
+TextL.Text = "PATH:"
+TextL.TextColor3 = Color3.new(1, 1, 1)
+TextL.TextSize = 14
+
+CopyPathBtn.Name = "CopyPathBtn"
+CopyPathBtn.Parent = DXplorerBody
+CopyPathBtn.BackgroundColor3 = Color3.new(0, 0.407843, 0.423529)
+CopyPathBtn.BorderColor3 = Color3.new(0.101961, 0.101961, 0.101961)
+CopyPathBtn.BorderSizePixel = 2
+CopyPathBtn.Position = UDim2.new(0.903047085, 0, 0.0335195549, 5)
+CopyPathBtn.Size = UDim2.new(0, 29, 0, 27)
+CopyPathBtn.Font = Enum.Font.SourceSansBold
+CopyPathBtn.Text = "C"
+CopyPathBtn.TextColor3 = Color3.new(0, 0, 0)
+CopyPathBtn.TextSize = 17
+
+CloseBtn.Name = "CloseBtn"
+CloseBtn.Parent = DXplorerTitle
+CloseBtn.BackgroundColor3 = Color3.new(0.101961, 0.101961, 0.101961)
+CloseBtn.BorderColor3 = Color3.new(0.101961, 0.101961, 0.101961)
+CloseBtn.BorderSizePixel = 0
+CloseBtn.Position = UDim2.new(0, 327, 0, 0)
+CloseBtn.Size = UDim2.new(0, 33, 0, 33)
+CloseBtn.Font = Enum.Font.SourceSansBold
+CloseBtn.Text = "x"
+CloseBtn.TextColor3 = Color3.new(1, 1, 1)
+CloseBtn.TextSize = 17
+
+PathTxt.Name = "PathTxt"
+PathTxt.Parent = PathFrm
+PathTxt.BackgroundColor3 = Color3.new(1, 1, 1)
+PathTxt.BackgroundTransparency = 1
+PathTxt.BorderSizePixel = 0
+PathTxt.Size = UDim2.new(0, 268, 0, 27)
+PathTxt.Font = Enum.Font.SciFi
+PathTxt.Text = "game"
+PathTxt.TextColor3 = Color3.new(1, 1, 1)
+PathTxt.TextScaled = true
+PathTxt.TextSize = 14
+PathTxt.TextWrapped = true
+
+-- Scripts:
+local Plr = game:GetService("Players").LocalPlayer
+local Mouse = Plr:GetMouse()
+
+Mouse.Button1Down:connect(function()
+if not game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.LeftControl) then return end
+if not Mouse.Target then return end
+warn'----------------------------'
+warn("Object Name: "..Mouse.Target.Name)
+warn'----------------------------'
+local r = Mouse.Target
+local rr = ""
+local check = true
+
+repeat
+    if string.match(r.Name, " ")then
+        rr = '["'..r.Name..'"]'..rr
+        r = r.Parent
+        if r.Name == "Game"then
+            rr = "game"..rr
+            r = r.Parent
+        end
+    else
+        rr = '.'..r.Name..rr
+        r = r.Parent
+        if r.Name == "Game"then
+            rr = "game"..rr
+            r = r.Parent
+        end
+    end
+until r == nil
+PathTxt.Text = rr
+end)
+
+CopyPathBtn.MouseButton1Click:Connect(function()
+local script = PathTxt.Text
+local copy
+if Clipboard ~= nil then
+copy = Clipboard.set
+elseif Synapse ~= nil then
+copy = function(str)
+Synapse:Copy(str)
+end
+elseif setclipboard ~= nil then
+copy = setclipboard
+end
+copy(script)
+end)
+
+CloseBtn.MouseButton1Click:Connect(function()
+DXplorer:Destroy()
+end)
