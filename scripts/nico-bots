@@ -1,0 +1,66 @@
+-- https://fern.wtf/scripts/nico_bot.lua
+-- https://v3rmillion.net/showthread.php?tid=1183376
+-- (I readd files so in case the website goes down or they take it down it'll still be archived)
+
+function AddHighlight(powerBox)
+    local Highlight = Instance.new("Highlight")
+    Highlight.Adornee = powerBox
+    Highlight.Parent = powerBox.PowerInteract
+    powerBox.PowerInteract.HoldDuration = 0
+    if powerBox.PowerInteract.Enabled then
+        Highlight.FillColor = Color3.fromRGB(162, 0, 255)
+        powerBox.PowerInteract:GetPropertyChangedSignal("Enabled"):Connect(function()
+            Highlight.FillColor = Color3.fromRGB(0, 255, 34)
+        end)
+    else
+        Highlight.FillColor = Color3.fromRGB(0, 255, 34)
+    end
+end
+
+function InitPowerBox(v)
+    v.ChildAdded:Connect(function(object)
+        if object.Name == "PowerInteract" then
+            AddHighlight(v)
+        end
+    end)
+    if v:FindFirstChild("PowerInteract") then
+        AddHighlight(v)
+    end
+end
+
+for i,v in next, workspace.PowerBox:GetChildren() do
+    InitPowerBox(v)
+end
+workspace.PowerBox.ChildAdded:Connect(function(object)
+    InitPowerBox(object)
+end)
+
+function InitBots(v)
+    task.spawn(function()
+        local hitbox = v:WaitForChild("hitbox")
+        if hitbox then
+            if v.hitbox:FindFirstChild("Highlight") then
+                v.hitbox.Highlight:Destroy()
+            end
+            v.hitbox.Transparency = 0
+            local Highlight = Instance.new("Highlight")
+            Highlight.Adornee = v
+            Highlight.Parent = v.hitbox
+        end
+    end)
+end
+
+for i,v in next, workspace.bots:GetChildren() do
+    InitBots(v)
+end
+workspace.bots.ChildAdded:Connect(function(object)
+    InitBots(object)
+end)
+
+if game:GetService("ReplicatedStorage").CurrentEvent.Value == "BlackOut" then
+    for i,v in next, workspace.PowerBox:GetChildren() do
+        if v:FindFirstChild("PowerInteract") then
+            AddHighlight(v)
+        end
+    end
+end
